@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import fiji.plugin.trackmate.Model;
 import fiji.plugin.trackmate.SpotCollection;
-import fiji.plugin.trackmate.gui.ConfigurationPanel;
+import fiji.plugin.trackmate.gui.components.ConfigurationPanel;
 import fiji.plugin.trackmate.tracking.SpotTracker;
 import fiji.plugin.trackmate.tracking.SpotTrackerFactory;
 
@@ -65,7 +65,7 @@ public class PointDescriptorTrackerFactory implements SpotTrackerFactory {
 	}
 
 	@Override
-	public boolean checkSettingsValidity(Map<String, Object> settings) {
+	public boolean checkSettingsValidity(final Map<String, Object> settings) {
 		if (settings == null) {
 			errorMessage = "Settings map is null.\n";
 			return false;
@@ -119,19 +119,19 @@ public class PointDescriptorTrackerFactory implements SpotTrackerFactory {
 	}
 
 	@Override
-	public SpotTracker create(SpotCollection spots, Map<String, Object> settings) {
-		int subsetSize = (int) settings.get(SUBSET_NEIGHBORS);
-		int numNeighbors = (int) settings.get(NUM_NEIGHBORS);
-		int maxInterval = (int) settings.get(MAX_INTERVAL);
-		double costThreshold = (double) settings.get(COST_THRESHOLD);
-		double maxDistance = (double) settings.get(MAX_LINKING_DISTANCE);
-		boolean pruneGraph = (boolean) settings.get(PRUNE_GRAPH);
+	public SpotTracker create(final SpotCollection spots, final Map<String, Object> settings) {
+		final int subsetSize = (int) settings.get(SUBSET_NEIGHBORS);
+		final int numNeighbors = (int) settings.get(NUM_NEIGHBORS);
+		final int maxInterval = (int) settings.get(MAX_INTERVAL);
+		final double costThreshold = (double) settings.get(COST_THRESHOLD);
+		final double maxDistance = (double) settings.get(MAX_LINKING_DISTANCE);
+		final boolean pruneGraph = (boolean) settings.get(PRUNE_GRAPH);
 		return new PointDescriptorTracker(spots, subsetSize, numNeighbors, maxInterval, costThreshold, maxDistance*maxDistance, pruneGraph);
 	}
 
 	@Override
 	public Map<String, Object> getDefaultSettings() {
-		Map<String, Object> settings = new HashMap<>(5);
+		final Map<String, Object> settings = new HashMap<>(5);
 
 		settings.put(SUBSET_NEIGHBORS, DEFAULT_SUBSET_NEIGHBORS);
 		settings.put(NUM_NEIGHBORS, DEFAULT_NUM_NEIGHBORS);
@@ -149,73 +149,73 @@ public class PointDescriptorTrackerFactory implements SpotTrackerFactory {
 	}
 
 	@Override
-	public ConfigurationPanel getTrackerConfigurationPanel(Model model) {
+	public ConfigurationPanel getTrackerConfigurationPanel(final Model model) {
 		return new PointDescriptorTrackerConfigPanel();
 	}
 
 	@Override
-	public boolean marshall(Map<String, Object> settings, Element element) {
+	public boolean marshall(final Map<String, Object> settings, final Element element) {
 		if (!checkSettingsValidity(settings)) return false;
 
-		int subsetSize = (int) settings.get(SUBSET_NEIGHBORS);
+		final int subsetSize = (int) settings.get(SUBSET_NEIGHBORS);
 		element.setAttribute(SUBSET_NEIGHBORS, "" + subsetSize);
-		int numNeighbors = (int) settings.get(NUM_NEIGHBORS);
+		final int numNeighbors = (int) settings.get(NUM_NEIGHBORS);
 		element.setAttribute(NUM_NEIGHBORS, "" + numNeighbors);
-		int maxInterval = (int) settings.get(MAX_INTERVAL);
+		final int maxInterval = (int) settings.get(MAX_INTERVAL);
 		element.setAttribute(MAX_INTERVAL, "" + maxInterval);
-		double costThreshold = (double) settings.get(COST_THRESHOLD);
+		final double costThreshold = (double) settings.get(COST_THRESHOLD);
 		element.setAttribute(COST_THRESHOLD, "" + costThreshold);
-		double maxDistance = (double) settings.get(MAX_LINKING_DISTANCE);
+		final double maxDistance = (double) settings.get(MAX_LINKING_DISTANCE);
 		element.setAttribute(MAX_LINKING_DISTANCE, "" + maxDistance);
-		boolean doPrune = (boolean) settings.get(PRUNE_GRAPH);
+		final boolean doPrune = (boolean) settings.get(PRUNE_GRAPH);
 		element.setAttribute(PRUNE_GRAPH, "" + doPrune);
 
 		return true;
 	}
 
 	@Override
-	public String toString(Map<String, Object> settings) {
+	public String toString(final Map<String, Object> settings) {
 		if (!checkSettingsValidity(settings)) return errorMessage;
 
-		StringBuilder str = new StringBuilder();
-		int subsetSize = (int) settings.get(SUBSET_NEIGHBORS);
+		final StringBuilder str = new StringBuilder();
+		final int subsetSize = (int) settings.get(SUBSET_NEIGHBORS);
 		str.append("  Minimal number of spots in matching subset: " + subsetSize + ".\n");
-		int numNeighbors = (int) settings.get(NUM_NEIGHBORS);
+		final int numNeighbors = (int) settings.get(NUM_NEIGHBORS);
 		str.append("  Number of spots for subset selection: " + numNeighbors + ".\n");
-		int maxInterval = (int) settings.get(MAX_INTERVAL);
+		final int maxInterval = (int) settings.get(MAX_INTERVAL);
 		str.append("  Maximal frame interval: " + maxInterval + ".\n");
-		double costThreshold = (double) settings.get(COST_THRESHOLD);
+		final double costThreshold = (double) settings.get(COST_THRESHOLD);
 		str.append("  Cost threshold: " + costThreshold + ".\n");
-		double maxDistance = (double) settings.get(MAX_LINKING_DISTANCE);
+		final double maxDistance = (double) settings.get(MAX_LINKING_DISTANCE);
 		str.append("  Maximal linking distance: " + maxDistance + ".\n");
-		boolean doPrune = (boolean) settings.get(PRUNE_GRAPH);
+		final boolean doPrune = (boolean) settings.get(PRUNE_GRAPH);
 		str.append("  Return pruned graph: " + doPrune + ".\n");
 
 		return str.toString();
 	}
 
 	@Override
-	public boolean unmarshall(Element element, Map<String, Object> settings) {
+	public boolean unmarshall(final Element element, final Map<String, Object> settings) {
 		try {
-			int subsetSize = element.getAttribute(SUBSET_NEIGHBORS).getIntValue();
+			final int subsetSize = element.getAttribute(SUBSET_NEIGHBORS).getIntValue();
 			settings.put(SUBSET_NEIGHBORS, subsetSize);
 
-			int numNeighbors = element.getAttribute(NUM_NEIGHBORS).getIntValue();
+			final int numNeighbors = element.getAttribute(NUM_NEIGHBORS).getIntValue();
 			settings.put(NUM_NEIGHBORS, numNeighbors);
 
-			int maxInterval = element.getAttribute(MAX_INTERVAL).getIntValue();
+			final int maxInterval = element.getAttribute(MAX_INTERVAL).getIntValue();
 			settings.put(MAX_INTERVAL, maxInterval);
 
-			double costThreshold = element.getAttribute(COST_THRESHOLD).getDoubleValue();
+			final double costThreshold = element.getAttribute(COST_THRESHOLD).getDoubleValue();
 			settings.put(COST_THRESHOLD, costThreshold);
 
-			double maxDistance = element.getAttribute(MAX_LINKING_DISTANCE).getDoubleValue();
+			final double maxDistance = element.getAttribute(MAX_LINKING_DISTANCE).getDoubleValue();
 			settings.put(MAX_LINKING_DISTANCE, maxDistance);
 
-			boolean doPrune = element.getAttribute(PRUNE_GRAPH).getBooleanValue();
+			final boolean doPrune = element.getAttribute(PRUNE_GRAPH).getBooleanValue();
 			settings.put(PRUNE_GRAPH, doPrune);
 		}
-		catch (DataConversionException exc) {
+		catch (final DataConversionException exc) {
 			errorMessage = "Error retrieving settings from XML: " + exc.toString();
 			return false;
 		}
