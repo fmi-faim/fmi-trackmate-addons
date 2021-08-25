@@ -110,7 +110,8 @@
 		<!-- Fiji dependencies -->
 		<dependency>
 			<groupId>sc.fiji</groupId>
-			<artifactId>TrackMate_</artifactId>
+			<artifactId>TrackMate</artifactId>
+			<version>7.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>sc.fiji</groupId>
