@@ -2,6 +2,7 @@
 
 [![Build Status](https://github.com/fmi-faim/fmi-trackmate-addons/actions/workflows/build-main.yml/badge.svg)](https://github.com/fmi-faim/fmi-trackmate-addons/actions/workflows/build-main.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9bbc626c95dc4068877cac17fca8bba1)](https://www.codacy.com/gh/fmi-faim/fmi-trackmate-addons/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fmi-faim/fmi-trackmate-addons&amp;utm_campaign=Badge_Grade)
+[![DOI](https://zenodo.org/badge/83236193.svg)](https://zenodo.org/badge/latestdoi/83236193)
 
 These addons for [TrackMate](https://imagej.net/TrackMate) include:
 
