@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>30.0.0</version>
+		<version>31.1.0</version>
 		<relativePath />
 	</parent>
 
 	<groupId>ch.fmi</groupId>
 	<artifactId>fmi-trackmate-addons</artifactId>
-	<version>0.5.2-SNAPSHOT</version>
+	<version>0.6.0-SNAPSHOT</version>
 
 	<name>FMI TrackMate Add-ons</name>
 	<description>Add-ons for TrackMate in Fiji</description>
@@ -79,8 +79,6 @@
 		<license.licenseName>bsd_2</license.licenseName>
 		<license.copyrightOwners>Friedrich Miescher Institute for Biomedical Research</license.copyrightOwners>
 		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
-
-		<imglib2.version>5.9.0</imglib2.version>
 	</properties>
 
 	<dependencies>
@@ -111,7 +109,6 @@
 		<dependency>
 			<groupId>sc.fiji</groupId>
 			<artifactId>TrackMate</artifactId>
-			<version>7.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>sc.fiji</groupId>
