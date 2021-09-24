@@ -11,7 +11,7 @@ import org.scijava.plugin.Plugin;
 
 import fiji.plugin.trackmate.Model;
 import fiji.plugin.trackmate.SpotCollection;
-import fiji.plugin.trackmate.gui.ConfigurationPanel;
+import fiji.plugin.trackmate.gui.components.ConfigurationPanel;
 import fiji.plugin.trackmate.tracking.SpotTracker;
 import fiji.plugin.trackmate.tracking.SpotTrackerFactory;
 
@@ -21,6 +21,7 @@ import fiji.plugin.trackmate.tracking.SpotTrackerFactory;
  * @author Jan Eglinger
  * @deprecated superseded by {@link PointDescriptorTrackerFactory}
  */
+@Deprecated
 @Plugin(type = SpotTrackerFactory.class)
 public class PointCloudRegistrationTrackerFactory implements
 	SpotTrackerFactory
@@ -75,53 +76,53 @@ public class PointCloudRegistrationTrackerFactory implements
 	}
 
 	@Override
-	public SpotTracker create(SpotCollection spots,
-		Map<String, Object> settings)
+	public SpotTracker create(final SpotCollection spots,
+		final Map<String, Object> settings)
 	{
-		int minNumInliers = (int) settings.get(MIN_NUM_INLIERS);
-		int frameRange = (int) settings.get(FRAME_RANGE);
-		boolean discardLowCoverage = (boolean) settings.get(DISCARD_LOW_COVERAGE);
-		double minCoverage = (double) settings.get(MIN_COVERAGE_FACTOR);
+		final int minNumInliers = (int) settings.get(MIN_NUM_INLIERS);
+		final int frameRange = (int) settings.get(FRAME_RANGE);
+		final boolean discardLowCoverage = (boolean) settings.get(DISCARD_LOW_COVERAGE);
+		final double minCoverage = (double) settings.get(MIN_COVERAGE_FACTOR);
 		return new PointCloudRegistrationTracker(spots, minNumInliers, frameRange, discardLowCoverage, minCoverage);
 	}
 
 	@Override
-	public ConfigurationPanel getTrackerConfigurationPanel(Model model) {
+	public ConfigurationPanel getTrackerConfigurationPanel(final Model model) {
 		return new PointCloudRegistrationTrackerConfigPanel();
 	}
 
 	@Override
-	public boolean marshall(Map<String, Object> settings, Element element) {
+	public boolean marshall(final Map<String, Object> settings, final Element element) {
 		if (!checkSettingsValidity(settings)) return false;
 
-		int minNumInliers = (int) settings.get(MIN_NUM_INLIERS);
+		final int minNumInliers = (int) settings.get(MIN_NUM_INLIERS);
 		element.setAttribute(MIN_NUM_INLIERS, "" + minNumInliers);
-		int frameRange = (int) settings.get(FRAME_RANGE);
+		final int frameRange = (int) settings.get(FRAME_RANGE);
 		element.setAttribute(FRAME_RANGE, "" + frameRange);
-		boolean discardLowCoverage = (boolean) settings.get(DISCARD_LOW_COVERAGE);
+		final boolean discardLowCoverage = (boolean) settings.get(DISCARD_LOW_COVERAGE);
 		element.setAttribute(DISCARD_LOW_COVERAGE, "" + discardLowCoverage);
-		double minCoverage = (double) settings.get(MIN_COVERAGE_FACTOR);
+		final double minCoverage = (double) settings.get(MIN_COVERAGE_FACTOR);
 		element.setAttribute(MIN_COVERAGE_FACTOR, "" + minCoverage);
 
 		return true;
 	}
 
 	@Override
-	public boolean unmarshall(Element element, Map<String, Object> settings) {
+	public boolean unmarshall(final Element element, final Map<String, Object> settings) {
 		try {
-			int minNumInliers = element.getAttribute(MIN_NUM_INLIERS).getIntValue();
+			final int minNumInliers = element.getAttribute(MIN_NUM_INLIERS).getIntValue();
 			settings.put(MIN_NUM_INLIERS, minNumInliers);
 
-			int frameRange = element.getAttribute(FRAME_RANGE).getIntValue();
+			final int frameRange = element.getAttribute(FRAME_RANGE).getIntValue();
 			settings.put(FRAME_RANGE, frameRange);
 
-			boolean discardLowCoverage = element.getAttribute(DISCARD_LOW_COVERAGE).getBooleanValue();
+			final boolean discardLowCoverage = element.getAttribute(DISCARD_LOW_COVERAGE).getBooleanValue();
 			settings.put(DISCARD_LOW_COVERAGE, discardLowCoverage);
 
-			double minCoverage = element.getAttribute(MIN_COVERAGE_FACTOR).getDoubleValue();
+			final double minCoverage = element.getAttribute(MIN_COVERAGE_FACTOR).getDoubleValue();
 			settings.put(MIN_COVERAGE_FACTOR, minCoverage);
 		}
-		catch (DataConversionException exc) {
+		catch (final DataConversionException exc) {
 			errorMessage = "Error retrieving settings from XML: " + exc.toString();
 			return false;
 		}
@@ -129,24 +130,24 @@ public class PointCloudRegistrationTrackerFactory implements
 	}
 
 	@Override
-	public String toString(Map<String, Object> sm) {
+	public String toString(final Map<String, Object> sm) {
 		if (!checkSettingsValidity(sm)) return errorMessage;
 
-		StringBuilder str = new StringBuilder();
-		int minNumInliers = (int) sm.get(MIN_NUM_INLIERS);
+		final StringBuilder str = new StringBuilder();
+		final int minNumInliers = (int) sm.get(MIN_NUM_INLIERS);
 		str.append("  Minimal number of inlier spots per comparison: " + minNumInliers + ".\n");
-		int frameRange = (int) sm.get(FRAME_RANGE);
+		final int frameRange = (int) sm.get(FRAME_RANGE);
 		str.append("  Range of frame intervals being compared: " + frameRange + ".\n");
-		boolean discardLowCoverage = (boolean) sm.get(DISCARD_LOW_COVERAGE);
+		final boolean discardLowCoverage = (boolean) sm.get(DISCARD_LOW_COVERAGE);
 		str.append("  Discard pairs with low field-of-view coverage: " + discardLowCoverage + ".\n");
-		double minCoverage = (double) sm.get(MIN_COVERAGE_FACTOR);
+		final double minCoverage = (double) sm.get(MIN_COVERAGE_FACTOR);
 		str.append("  Minimal fraction (of each dimension) covered by inliers within single frame: " + minCoverage + ".\n");
 		return str.toString();
 	}
 
 	@Override
 	public Map<String, Object> getDefaultSettings() {
-		Map<String, Object> settings = new HashMap<>(5);
+		final Map<String, Object> settings = new HashMap<>(5);
 		// Model choice?
 
 
@@ -166,7 +167,7 @@ public class PointCloudRegistrationTrackerFactory implements
 	}
 
 	@Override
-	public boolean checkSettingsValidity(Map<String, Object> settings) {
+	public boolean checkSettingsValidity(final Map<String, Object> settings) {
 		if (settings == null) {
 			errorMessage = "Settings map is null.\n";
 			return false;

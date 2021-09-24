@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
-import fiji.plugin.trackmate.gui.ConfigurationPanel;
-import fiji.plugin.trackmate.gui.panels.components.JNumericTextField;
+import fiji.plugin.trackmate.gui.components.ConfigurationPanel;
 
 /**
  * {@link ConfigurationPanel} implementation for {@link PointDescriptorTrackerFactory}.
@@ -17,11 +17,13 @@ import fiji.plugin.trackmate.gui.panels.components.JNumericTextField;
  */
 public class PointDescriptorTrackerConfigPanel extends ConfigurationPanel {
 
-	private JNumericTextField subsetSizeTextField;
-	private JNumericTextField numNeighborsTextField;
-	private JNumericTextField maxIntervalTextField;
-	private JNumericTextField costThresholdTextField;
-	private JNumericTextField maxDistanceTextField;
+	private static final long serialVersionUID = 1L;
+
+	private JFormattedTextField subsetSizeTextField;
+	private JFormattedTextField numNeighborsTextField;
+	private JFormattedTextField maxIntervalTextField;
+	private JFormattedTextField costThresholdTextField;
+	private JFormattedTextField maxDistanceTextField;
 	private JCheckBox pruneCheckBox;
 
 	public PointDescriptorTrackerConfigPanel() {
@@ -30,27 +32,27 @@ public class PointDescriptorTrackerConfigPanel extends ConfigurationPanel {
 
 	private void initGui() {
 		add(new JLabel("Number of neighbors in subset"));
-		subsetSizeTextField = new JNumericTextField(PointDescriptorTrackerFactory.SUBSET_NEIGHBORS);
+		subsetSizeTextField = new JFormattedTextField( PointDescriptorTrackerFactory.DEFAULT_SUBSET_NEIGHBORS );
 		add(subsetSizeTextField);
 		
 		add(new JLabel("Number of neighbors to choose from"));
-		numNeighborsTextField = new JNumericTextField(PointDescriptorTrackerFactory.NUM_NEIGHBORS);
+		numNeighborsTextField = new JFormattedTextField( PointDescriptorTrackerFactory.DEFAULT_NUM_NEIGHBORS );
 		add(numNeighborsTextField);
 		
 		add(new JLabel("Maximum frame interval for matching"));
-		maxIntervalTextField = new JNumericTextField(PointDescriptorTrackerFactory.MAX_INTERVAL);
+		maxIntervalTextField = new JFormattedTextField( PointDescriptorTrackerFactory.DEFAULT_MAX_INTERVAL );
 		add(maxIntervalTextField);
 
 		add(new JLabel("Cost (descriptor distance) threshold"));
-		costThresholdTextField = new JNumericTextField(PointDescriptorTrackerFactory.COST_THRESHOLD);
+		costThresholdTextField = new JFormattedTextField( PointDescriptorTrackerFactory.DEFAULT_COST_THRESHOLD );
 		add(costThresholdTextField);
 
 		add(new JLabel("Maximum linking distance"));
-		maxDistanceTextField = new JNumericTextField(PointDescriptorTrackerFactory.MAX_LINKING_DISTANCE);
+		maxDistanceTextField = new JFormattedTextField( PointDescriptorTrackerFactory.DEFAULT_MAX_LINKING_DISTANCE );
 		add(maxDistanceTextField);
 
 		add(new JLabel("Return pruned graph"));
-		pruneCheckBox = new JCheckBox(PointDescriptorTrackerFactory.PRUNE_GRAPH);
+		pruneCheckBox = new JCheckBox(PointDescriptorTrackerFactory.PRUNE_GRAPH, PointDescriptorTrackerFactory.DEFAULT_PRUNE_GRAPH);
 		add(pruneCheckBox);
 }
 
@@ -61,18 +63,18 @@ public class PointDescriptorTrackerConfigPanel extends ConfigurationPanel {
 
 	@Override
 	public Map<String, Object> getSettings() {
-		Map<String, Object> map = new HashMap<>(5);
+		final Map<String, Object> map = new HashMap<>(5);
 		map.put(PointDescriptorTrackerFactory.SUBSET_NEIGHBORS, (int) subsetSizeTextField.getValue());
 		map.put(PointDescriptorTrackerFactory.NUM_NEIGHBORS, (int) numNeighborsTextField.getValue());
 		map.put(PointDescriptorTrackerFactory.MAX_INTERVAL, (int) maxIntervalTextField.getValue());
 		map.put(PointDescriptorTrackerFactory.COST_THRESHOLD, (double) costThresholdTextField.getValue());
 		map.put(PointDescriptorTrackerFactory.MAX_LINKING_DISTANCE, (double) maxDistanceTextField.getValue());
-		map.put(PointDescriptorTrackerFactory.PRUNE_GRAPH, (boolean) pruneCheckBox.isSelected());
+		map.put(PointDescriptorTrackerFactory.PRUNE_GRAPH, pruneCheckBox.isSelected());
 		return map;
 	}
 
 	@Override
-	public void setSettings(Map<String, Object> settings) {
+	public void setSettings(final Map<String, Object> settings) {
 		subsetSizeTextField.setText("" + settings.get(PointDescriptorTrackerFactory.SUBSET_NEIGHBORS));
 		numNeighborsTextField.setText("" + settings.get(PointDescriptorTrackerFactory.NUM_NEIGHBORS));
 		maxIntervalTextField.setText("" + settings.get(PointDescriptorTrackerFactory.MAX_INTERVAL));

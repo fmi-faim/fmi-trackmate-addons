@@ -3,15 +3,8 @@ package ch.fmi.trackmate.tracking;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NavigableSet;
-import java.util.Set;
-import java.util.SortedSet;
 import java.util.Vector;
 
-import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
@@ -20,12 +13,8 @@ import fiji.plugin.trackmate.Spot;
 import fiji.plugin.trackmate.SpotCollection;
 import fiji.plugin.trackmate.tracking.SpotTracker;
 import mpicbg.imglib.algorithm.scalespace.DifferenceOfGaussianPeak;
-import mpicbg.imglib.algorithm.scalespace.DifferenceOfGaussian.SpecialPoint;
 import mpicbg.imglib.type.numeric.real.FloatType;
-import mpicbg.models.AffineModel3D;
 import mpicbg.models.RigidModel3D;
-import mpicbg.models.SimilarityModel3D;
-import mpicbg.models.TranslationModel3D;
 import plugin.DescriptorParameters;
 import process.ComparePair;
 import process.Matching;

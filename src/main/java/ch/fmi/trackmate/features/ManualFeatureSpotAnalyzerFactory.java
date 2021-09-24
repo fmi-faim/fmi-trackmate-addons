@@ -7,16 +7,14 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
-import net.imagej.ImgPlus;
-import net.imglib2.type.NativeType;
-import net.imglib2.type.numeric.RealType;
-
 import org.scijava.plugin.Plugin;
 
 import fiji.plugin.trackmate.Dimension;
-import fiji.plugin.trackmate.Model;
 import fiji.plugin.trackmate.features.spot.SpotAnalyzer;
 import fiji.plugin.trackmate.features.spot.SpotAnalyzerFactory;
+import net.imagej.ImgPlus;
+import net.imglib2.type.NativeType;
+import net.imglib2.type.numeric.RealType;
 
 @Plugin(type = SpotAnalyzerFactory.class)
 public class ManualFeatureSpotAnalyzerFactory<T extends RealType<T> & NativeType<T>> implements SpotAnalyzerFactory<T> {
@@ -101,32 +99,9 @@ public class ManualFeatureSpotAnalyzerFactory<T extends RealType<T> & NativeType
 		return NAME;
 	}
 
+	@SuppressWarnings( "unchecked" )
 	@Override
-	public SpotAnalyzer<T> getAnalyzer(Model model, ImgPlus<T> img, int frame,
-		int channel)
-	{
-		return new SpotAnalyzer<T>() {
-
-			@Override
-			public boolean checkInput() {
-				return true;
-			}
-
-			@Override
-			public boolean process() {
-				// TODO decide whether or not to put default value 0
-				return true;
-			}
-
-			@Override
-			public String getErrorMessage() {
-				return null;
-			}
-
-			@Override
-			public long getProcessingTime() {
-				return 0;
-			}};
+	public SpotAnalyzer< T > getAnalyzer( final ImgPlus< T > img, final int frame, final int channel )	{
+		return ( SpotAnalyzer< T > ) SpotAnalyzer.DUMMY_ANALYZER;
 	}
-
 }

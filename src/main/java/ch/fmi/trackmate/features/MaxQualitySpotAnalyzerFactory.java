@@ -8,16 +8,14 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
-import net.imagej.ImgPlus;
-import net.imglib2.type.NativeType;
-import net.imglib2.type.numeric.RealType;
-
 import org.scijava.plugin.Plugin;
 
 import fiji.plugin.trackmate.Dimension;
-import fiji.plugin.trackmate.Model;
 import fiji.plugin.trackmate.features.spot.SpotAnalyzer;
 import fiji.plugin.trackmate.features.spot.SpotAnalyzerFactory;
+import net.imagej.ImgPlus;
+import net.imglib2.type.NativeType;
+import net.imglib2.type.numeric.RealType;
 
 @Plugin(type = SpotAnalyzerFactory.class, priority = 0d)
 public class MaxQualitySpotAnalyzerFactory<T extends RealType<T> & NativeType<T>> implements SpotAnalyzerFactory<T> {
@@ -90,9 +88,9 @@ public class MaxQualitySpotAnalyzerFactory<T extends RealType<T> & NativeType<T>
 		return NAME;
 	}
 
+	
 	@Override
-	public SpotAnalyzer<T> getAnalyzer(Model model, ImgPlus<T> img, int frame, int channel) {
-		return new MaxQualitySpotAnalyzer<>(model, frame);
+	public SpotAnalyzer< T > getAnalyzer( final ImgPlus< T > img, final int frame, final int channel ) {
+		return new MaxQualitySpotAnalyzer<>();
 	}
-
 }
