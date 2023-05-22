@@ -24,7 +24,7 @@ package ch.fmi.trackmate.tracking;
 import java.util.Map;
 
 import fiji.plugin.trackmate.Spot;
-import fiji.plugin.trackmate.tracking.sparselap.costfunction.CostFunction;
+import fiji.plugin.trackmate.tracking.jaqaman.costfunction.CostFunction;
 import mpicbg.pointdescriptor.SimplePointDescriptor;
 import process.Particle;
 

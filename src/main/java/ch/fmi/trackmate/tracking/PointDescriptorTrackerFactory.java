@@ -242,4 +242,9 @@ public class PointDescriptorTrackerFactory implements SpotTrackerFactory {
 		}
 		return true;
 	}
+
+	@Override
+	public SpotTrackerFactory copy() {
+		return new PointDescriptorTrackerFactory();
+	}
 }

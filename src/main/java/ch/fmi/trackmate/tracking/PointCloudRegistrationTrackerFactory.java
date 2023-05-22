@@ -233,4 +233,8 @@ public class PointCloudRegistrationTrackerFactory implements
 		return errorMessage;
 	}
 
+	@Override
+	public SpotTrackerFactory copy() {
+		return new PointCloudRegistrationTrackerFactory();
+	}
 }
