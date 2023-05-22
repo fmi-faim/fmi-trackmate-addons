@@ -2,7 +2,7 @@
  * #%L
  * FMI Add-ons for TrackMate in Fiji
  * %%
- * Copyright (C) 2017 - 2021 Friedrich Miescher Institute for Biomedical Research
+ * Copyright (C) 2017 - 2023 Friedrich Miescher Institute for Biomedical Research
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
